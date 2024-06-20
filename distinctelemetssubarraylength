@@ -1,0 +1,71 @@
+import java.util.*;
+
+public class distinctsubarraymaxlength {
+  public static void main(String[] args) {
+    int a[] = { 1, 3, -1, -3, 7, -4, 3, 2, 9, 7, 1, 0, -11, 9, 9, 9,9,10,11 };
+    int k=3;
+    HashMap<Integer,Integer> hm=new HashMap<>();
+    System.out.println(sumofmaxsubarray(a,hm,k));
+  }
+  public static int sumofmaxsubarray(int a[],HashMap<Integer,Integer> hm,int p)
+  {
+    int cs=0,ps=0;
+    int i=0,j=p-1;
+    int ans=Integer.MIN_VALUE;
+    while(j<a.length)
+      {
+        if(i==0)
+        {
+          for(int k=i;k<=j;k++)
+            {
+              cs=cs+a[k];
+              if(hm.containsKey(a[k]))
+              {
+                hm.put(a[k],hm.get(a[k])+1);
+              }
+              else
+              {
+                hm.put(a[k],1);
+              }
+            }
+          ps=cs;
+          
+        }
+        else
+        {
+          cs=ps-a[i-1]+a[j];
+          ps=cs;
+          if(hm.containsKey(a[i-1]))
+          {
+            if(hm.get(a[i-1])==1)
+            {
+              hm.remove(a[i-1]);
+            }
+            else
+            {
+              hm.put(a[i-1],hm.get(a[i-1])-1);
+            }
+          }
+          if(hm.containsKey(a[j]))
+          {
+            hm.put(a[j],hm.get(a[j])+1);
+          }
+          else
+          {
+            hm.put(a[j],1);
+          }
+          
+        }
+        i++;
+        j++;
+        if(hm.size()==p)
+          {
+            ans=Math.max(ans,ps);
+          }
+      }
+    return ans;
+  }
+}
+
+
+  
