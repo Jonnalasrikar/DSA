@@ -1,0 +1,50 @@
+class linkedlist
+{
+    static class Node
+    {
+        int data;
+        Node next;
+        Node(int data)
+        {
+            this.data=data;
+            this.next=null;
+        }
+    }
+    public static Node createlinkedlist(int a[])
+    {
+        Node head=null;
+        Node tail=null;
+        for(int i=0;i<a.length;i++)
+        {
+            Node newnode=new Node(a[i]);
+            if(head==null)
+            {
+                head=tail=newnode;
+                
+            }
+            else
+            {
+                tail.next=newnode;
+                tail=newnode;
+            }
+        }
+        return head;
+        
+    }
+    public static void printlinkedlist(Node head)
+    {
+        Node temp=head;
+        while(temp!=null)
+        {
+            System.out.println(temp.data);
+            temp=temp.next;
+        }
+        
+    }
+    public static void main(String[] args)
+    {
+        int a[]={10,20,30,40,50};
+        Node start=createlinkedlist(a);
+        printlinkedlist(start);
+    }
+}
