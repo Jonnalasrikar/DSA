@@ -1,0 +1,66 @@
+import java.util.*;
+
+class linkedlist1 {
+  static class Node {
+    int data;
+    Node next;
+
+    Node(int data) {
+      this.data = data;
+      this.next = null;
+    }
+  }
+
+  public static Node createlist(int[] arr) {
+    Node head = null;
+    Node tail = null;
+    for (int i = 0; i < arr.length; i++) {
+      Node newnode = new Node(arr[i]);
+      if (head == null) {
+        head = newnode;
+        tail = newnode;
+      } else {
+        tail.next = newnode;
+        tail = newnode;
+      }
+    }
+    return head;
+  }
+
+  public static void printlist(Node head) {
+    Node temp = head;
+    while (temp != null) {
+      System.out.print(temp.data + " ");
+      temp = temp.next;
+    }
+  }
+
+  public static int getintersectionvalue(Node head1, Node head2) {
+    Node temp1 = head1;
+    Node temp2 = head2;
+    int value = 0;
+    while (temp1.next != null && temp2.next != null) {
+      if (temp1.data == temp2.data) {
+        if (value == 0) {
+          value = temp1.data;
+        }
+      } else {
+        value = 0;
+      }
+      temp1 = temp1.next;
+      temp2 = temp2.next;
+
+    }
+    return value;
+
+  }
+
+  public static void main(String[] args) {
+    int a[] = { 8, 9, 1, 3, 5, 6, 9, 7, 8 };
+    int b[] = { 1, 8, 9, 8, 7, 6, 9, 7, 8 };
+    Node head1 = createlist(a);
+    Node head2 = createlist(b);
+    System.out.println(getintersectionvalue(head1, head2));
+
+  }
+}
