@@ -1,0 +1,66 @@
+import java.util.*;
+
+class linkedlist2 {
+  static class Node {
+    int data;
+    Node next;
+
+    Node(int data) {
+      this.data = data;
+      this.next = null;
+    }
+  }
+
+  public static Node create(int a[]) {
+    Node head = null;
+    Node tail = null;
+    for (int i = 0; i < a.length; i++) {
+      Node newnode = new Node(a[i]);
+      if (head == null) {
+        head = tail = newnode;
+      } else {
+        tail.next = newnode;
+        tail = newnode;
+      }
+    }
+    return head;
+  }
+
+  public static void printlinkedlist(Node start) {
+    Node temp = start;
+    while (temp != null) {
+      System.out.println(temp.data);
+      temp = temp.next;
+    }
+  }
+
+  public static Node insertatbeginning(Node head, int data) {
+    Node newnode = new Node(data);
+    newnode.next = head;
+    head = newnode;
+    return head;
+
+  }
+
+  public static Node insertatend(Node head, int data) {
+    Node newnode = new Node(data);
+    Node temp = head;
+    while (temp.next != null) {
+      temp = temp.next;
+    }
+    temp.next = newnode;
+    return head;
+  }
+
+  public static void main(String[] args) {
+    int a[] = { 10, 20, 30, 40, 50 };
+    Node head = create(a);
+    printlinkedlist(head);
+    Node head1 = insertatbeginning(head, 60);
+    printlinkedlist(head1);
+    Node head2 = insertatend(head, 2000);
+    printlinkedlist(head2);
+
+  }
+
+}
