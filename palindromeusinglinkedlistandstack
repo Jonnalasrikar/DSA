@@ -1,0 +1,64 @@
+import java.util.*;
+
+class palindromelinkedlist {
+  static class Node {
+    Character data;
+    Node next;
+
+    Node(Character data) {
+      this.data = data;
+      this.next = null;
+    }
+  }
+
+  public static Node createlist(Character[] arr) {
+    Node head = null;
+    Node tail = null;
+    for (int i = 0; i < arr.length; i++) {
+      Node newnode = new Node(arr[i]);
+      if (head == null) {
+        head = newnode;
+        tail = newnode;
+      } else {
+        tail.next = newnode;
+        tail = newnode;
+      }
+    }
+    return head;
+  }
+
+  public static void printlist(Node head) {
+    Node temp = head;
+    while (temp != null) {
+      System.out.print(temp.data + " ");
+      temp = temp.next;
+    }
+  }
+
+  public static boolean checkpalindrome(Node head) {
+    Node temp = head;
+    Node a = head;
+    int b = 0;
+    Stack<Character> st = new Stack<>();
+    while (temp != null) {
+      st.push(temp.data);
+      temp = temp.next;
+    }
+    temp = head;
+    while (temp != null) {
+      char h = st.pop();
+      if (temp.data != h) {
+        return false;
+      }
+      temp = temp.next;
+    }
+    return true;
+  }
+
+  public static void main(String[] args) {
+    Character a[] = { 'm', 'a', 'l', 'a', 'y', 'a', 'l', 'a', 'm' };
+    Node head = createlist(a);
+    System.out.println(checkpalindrome(head));
+
+  }
+}
