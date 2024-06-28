@@ -1,0 +1,21 @@
+class diagonal {
+  public static void main(String args[]) {
+    int a[][] = { { 1, 5, 8, 10 }, { 0, 2, 6, 9 }, { 0, 0, 3, 7 }, { 0, 0, 0, 4 } };
+    printdiagonnaly(a);
+  }
+
+  public static void printdiagonnaly(int a[][]) {
+    int ri = 0, ci = 0;
+    while (ci < a.length) {
+      int cflag = ci;
+      while (cflag < a.length) {
+        System.out.println(a[ri][cflag]);
+        ri++;
+        cflag++;
+      }
+      ri = 0;
+      ci++;
+
+    }
+  }
+}
