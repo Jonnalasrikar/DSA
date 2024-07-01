@@ -1,0 +1,54 @@
+class graph1 {
+  public static void main(String[] args) {
+    int edges[][] = { { 0, 1 }, { 0, 2 }, { 1, 3 },{3,4} ,{ 4, 5 }, { 4, 7 }, { 5, 6 }, { 7, 6 }, { 2, 3 } };
+    int n = 8;
+    int graph[][] = creategraph(edges, n);
+    // printgraph(graph);
+    int src = 3;
+    int dest = 7;
+    int visted[] = new int[n];
+    visted[src] = 1;
+    boolean path = ispathexist(graph, src, dest, visted);
+    System.out.println(path);
+
+  }
+
+  public static boolean ispathexist(int graph[][], int src, int dest, int visted[]) {
+    if (src == dest)
+      return true;
+    int nbrs[] = graph[src];
+    for (int i = 0; i < nbrs.length; i++) {
+      if (nbrs[i] == 1) {
+        if (visted[i] == 0) {
+          visted[i] = 1;
+          boolean ans = ispathexist(graph, i, dest, visted);
+          if (ans == true)
+            return true;
+        }
+
+      }
+    }
+    return false;
+  }
+
+  public static void printgraph(int graph[][]) {
+    for (int row[] : graph) {
+      for (int col : row) {
+        System.out.print(col + " ");
+      }
+      System.out.println();
+
+    }
+  }
+
+  public static int[][] creategraph(int edges[][], int n) {
+    int graph[][] = new int[n][n];
+    for (int row[] : edges) {
+      int src = row[0];
+      int dest = row[1];
+      graph[src][dest] = 1;
+      graph[dest][src] = 1;
+    }
+    return graph;
+  }
+}
