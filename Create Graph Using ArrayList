@@ -1,0 +1,34 @@
+import java.util.*;
+
+class AdjacencyList {
+  public static void main(String args[]) {
+    int edges[][] = { { 1, 2 }, { 2, 3 }, { 2, 4 }, { 4, 5 }, { 5, 8 }, { 8, 7 }, { 7, 6 }, { 6, 1 }, { 6, 9 } };
+    int n = 10;
+    ArrayList<ArrayList<Integer>> graph = createAdjacencyList(edges, n);
+    printGraph(graph);
+  }
+
+  public static ArrayList<ArrayList<Integer>> createAdjacencyList(int edges[][], int n) {
+    ArrayList<ArrayList<Integer>> graph = new ArrayList<ArrayList<Integer>>();
+    for (int i = 0; i <= n; i++) {
+      graph.add(new ArrayList<Integer>());
+    }
+    for (int row[] : edges) {
+      int src = row[0];
+      int dest = row[1];
+      graph.get(src).add(dest);
+      graph.get(dest).add(src);
+    }
+    return graph;
+  }
+
+  public static void printGraph(ArrayList<ArrayList<Integer>> graph) {
+    for (int i = 0; i < graph.size(); i++) {
+      for (int j = 0; j < graph.get(i).size(); j++) {
+        System.out.print(i + "->" + graph.get(i).get(j) + ",");
+      }
+      System.out.println();
+    }
+
+  }
+}
